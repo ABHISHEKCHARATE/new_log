@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav a:hover {
+            color: #007BFF;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container h1 {
+            font-size: 36px;
+            color: #333;
+        }
+        .container p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        {% if request.user.is_authenticated %}
+            <p>{{ request.user.username }}</p>
+            <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">ADMIN Login</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+    </div>
+    <div class="container">
+        <h1>Welcome!</h1>
+    </div>
+</body>
+</html>
